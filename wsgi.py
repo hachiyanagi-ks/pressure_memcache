@@ -12,7 +12,8 @@ settings.configure(
             'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
             'LOCATION': [
                 '%(host)s:%(port)d' % {
-                    'host': subprocess.check_output('boot2docker ip', shell=True).decode().strip(),
+                    #'host': subprocess.check_output('boot2docker ip', shell=True).decode().strip(),
+                    'host': 'localhost',
                     'port': 11211,
                 }
             ],
@@ -46,6 +47,7 @@ def top(request):
     response = HttpResponse(s, content_type='text/plain')
     response.set_cookie('v', v)
     request.session['v'] = v
+    print('new value is {}'.format(v))
     return response
 
 
